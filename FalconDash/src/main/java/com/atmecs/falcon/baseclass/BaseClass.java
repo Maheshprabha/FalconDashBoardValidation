@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
 
 import com.atmecs.falcon.FilePath;
+import com.atmecs.falcon.commonhelpers.CommonHelpers;
 import com.atmecs.falcon.locationreader.LocationReader;
 
 public class BaseClass {
@@ -23,6 +24,6 @@ public class BaseClass {
 		System.out.println(baseUrl);
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
+		CommonHelpers.implicitWait(driver);
 	}
-
 }

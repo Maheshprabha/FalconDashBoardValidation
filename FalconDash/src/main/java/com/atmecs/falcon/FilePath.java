@@ -12,5 +12,4 @@ public class FilePath {
 	public static final String valid_path = "./src/test/resources/Locators/valid.properties";
 	public static final String Dash_validpath = "./src/test/resources/testdata/dashboard.properties";
 	public static final String Property_Reader = "./src/main/java/com/atmecs/falcon/property/PropertyReader.java";
-	
 }

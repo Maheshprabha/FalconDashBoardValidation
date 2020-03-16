@@ -1,9 +1,13 @@
 package com.atmecs.falcon.commonhelpers;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -15,7 +19,7 @@ public class CommonHelpers {
 
 	public static void webElement(WebDriver driver, String elementPath, String actual, String expected) {
 		driver.findElement(By.xpath(elementPath)).getText();
-		System.out.println("");
+		// System.out.println("");
 	}
 
 	public static void SendkeysAction(WebDriver driver, String elementPath, String value) {
@@ -71,9 +75,8 @@ public class CommonHelpers {
 
 	public static void explicitWait(WebDriver driver, String xpath) {
 		WebDriverWait wait = new WebDriverWait(driver, FilePath.page_load_timeout);
-		WebElement element;
-		element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-		element.click();
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		// element.click();
 	}
 
 	public static void getValueText(WebDriver driver, String xpath, String actual, String expected) {
@@ -84,6 +87,41 @@ public class CommonHelpers {
 	String expected = reader.propertyRead("Dash_validpath", "restapi");
 	{
 		System.out.println("Expected :" + expected);
-
 	}
+
+	public static List<WebElement> headervalidate(WebDriver driver, String path) {
+		List<WebElement> allHeadersOfTable1 = driver.findElements(By.xpath(path));
+		return allHeadersOfTable1;
+	}
+
+	public static void validateTableValue(WebDriver driver, String actual, String expected) {
+
+		try {
+			Assert.assertEquals(actual, expected);
+			System.out.println("Validation is successful & actual value : " + actual);
+		} catch (AssertionError assertionfailure) {
+			System.out.println("Attribute not found");
+		}
+	}
+
+	public static void dropdown(WebDriver driver, String path, String text) {
+		WebElement element = driver.findElement(By.xpath(path));
+		Select select = new Select(element);
+		select.selectByVisibleText(text);
+	}
+
+	public static void selectList(WebDriver driver) {
+		selectList(driver);
+	}
+
+	public static void implicitWait(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(FilePath.page_load_timeout, TimeUnit.SECONDS);
+	}
+
+	public static void clickOption(WebDriver driver, String path) {
+		WebElement checkbox = driver.findElement(By.xpath(path));
+		System.out.println("enable status:" + checkbox.isEnabled());
+		checkbox.click();
+	}
+
 }
