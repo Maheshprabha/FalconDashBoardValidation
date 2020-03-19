@@ -4,6 +4,9 @@ import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Properties;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.atmecs.falcon.FilePath;
@@ -12,6 +15,7 @@ import com.atmecs.falcon.commonhelpers.CommonHelpers;
 import com.atmecs.falcon.dataallcator.DataLocator;
 import com.atmecs.falcon.dataallcator.ValidAllacator;
 import com.atmecs.falcon.dataallcator.ValidLocator;
+import com.atmecs.falcon.locationreader.ExcelReader;
 import com.atmecs.falcon.locationreader.LocationReader;
 import com.atmecs.falcon.pages.PageAction;
 import com.atmecs.falcon.property.PropertyReader;
@@ -39,19 +43,47 @@ public class TestScipt extends BaseClass {
 
 		/* Filter by falcon */
 		CommonHelpers.dropdown(driver, property.getProperty("loc_falcon"), "Falcon");
-		PageAction.validateTable(driver,0);
+		PageAction.validateTable(driver, 0);
 		Thread.sleep(1000);
 
 		/* Filter by pass */
 		CommonHelpers.dropdown(driver, property.getProperty("loc_createfalconpost"), "createFalconPosts");
 		CommonHelpers.dropdown(driver, property.getProperty("loc_pass"), "Pass");
-		PageAction.validateTable(driver,1);
 		Thread.sleep(1000);
+		PageAction.validateTable(driver, 1);
 
 		/* Filter by fail */
 		CommonHelpers.dropdown(driver, property.getProperty("loc_pass"), "Fail");
-		PageAction.validateTable(driver,2);
 		Thread.sleep(1000);
+		PageAction.validateTable(driver, 2);
 
+		/* Click dashboard */
+		CommonHelpers.clickOption(driver, property.getProperty("loc_dropdownbutton"));
+
+		/* Click download tooltip */
+		CommonHelpers.clickAction(driver, property.getProperty("loc_downloadbutton"));
+		// CommonHelpers.alertOperation(driver, "dismiss");
+
+		/* Click test case icon */
+		CommonHelpers.clickAction(driver, property.getProperty("loc_testcase"));
+		Thread.sleep(2000);
+
+		/* Click pass icon */
+		CommonHelpers.clickAction(driver, property.getProperty("loc_passbutton"));
+		Thread.sleep(2000);
+
+		/* Click fail icon */
+		CommonHelpers.clickAction(driver, property.getProperty("loc_failbutton"));
+		Thread.sleep(2000);
+
+		/* Click skip icon */
+		CommonHelpers.clickAction(driver, property.getProperty("loc_skipbutton"));
+		CommonHelpers.clickAction(driver, property.getProperty("loc_icon"));
+        
+		/* Validate the recent run table*/
+		CommonHelpers.clickAction(driver, property.getProperty("loc_recentruns"));
+		Thread.sleep(2000);
+		PageAction.validateTables(driver, 3);
+		
 	}
-}
+		}

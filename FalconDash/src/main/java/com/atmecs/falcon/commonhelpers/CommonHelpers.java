@@ -123,5 +123,13 @@ public class CommonHelpers {
 		System.out.println("enable status:" + checkbox.isEnabled());
 		checkbox.click();
 	}
-
+    public static void alertOperation(WebDriver driver,String action) {
+    	
+    	if(action.equalsIgnoreCase("accept")) {
+    		driver.switchTo().alert().accept();
+    	}
+    	else if(action.equalsIgnoreCase("dismiss")) {
+    		driver.switchTo().alert().dismiss();
+    	}
+    }
 }

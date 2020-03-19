@@ -13,18 +13,34 @@ public class PageAction {
 	public static WebDriver driver;
 	PropertyReader reader = new PropertyReader();
 
-	public static void validateTable(WebDriver driver,int cellNum) throws Exception {
+	public static void validateTable(WebDriver driver, int cellNum) throws Exception {
 
 		List<WebElement> table = driver.findElements(By.xpath("//tbody/tr/td"));
 		for (int i = 0; i < table.size(); i++) {
-		System.out.println("ActualTableValue:" + table.get(i).getText());
-		try {
-			Assert.assertEquals(table.get(i).getText(), ExcelReader.readData(FilePath.VALID_TABLE, "table", i, cellNum));
-			System.out.println("ExpectedTableValue:" + ExcelReader.readData(FilePath.VALID_TABLE, "table", i, cellNum));
+			System.out.println("ActualTableValue:" + table.get(i).getText());
+			try {
+				Assert.assertEquals(table.get(i).getText(),
+						ExcelReader.readData(FilePath.VALID_TABLE, "table", i, cellNum));
+				System.out.println(
+						"ExpectedTableValue:" + ExcelReader.readData(FilePath.VALID_TABLE, "table", i, cellNum));
 			} catch (AssertionError assertionerror) {
 				System.out.println("Assertion error");
 			}
+		}
+	}
 
+	public static void validateTables(WebDriver driver, int cellNum) throws Exception {
+		List<WebElement> table1 = driver.findElements(By.xpath("//td[@class=\"ng-binding\"]"));
+		for (int i = 0; i < table1.size(); i++) {
+			System.out.println("ActualTableValue:" + table1.get(i).getText());
+			try {
+				Assert.assertEquals(table1.get(i).getText(),
+						ExcelReader.readData(FilePath.VALID_TABLE, "table", i, cellNum));
+				System.out.println(
+						"ExpectedTableValue:" + ExcelReader.readData(FilePath.VALID_TABLE, "table", i, cellNum));
+			} catch (AssertionError assertionerror) {
+				System.out.println("Assertion error");
+			}
 		}
 	}
 }
