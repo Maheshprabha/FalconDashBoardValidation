@@ -39,6 +39,9 @@ public class TestScipt extends BaseClass {
 		property = LocationReader.readLocation(FilePath.locator_path);
 		CommonHelpers.clickAction(driver, property.getProperty("loc_dashboard"));
 		CommonHelpers.clickAction(driver, property.getProperty("loc_restapi"));
+		// CommonHelpers.clickAction(driver, property.getProperty("loc_falconpage"));
+		// CommonHelpers.clickAction(driver,
+		// property.getProperty("loc_samplefalcontest"));
 		CommonHelpers.explicitWait(driver, property.getProperty("loc_falcon"));
 
 		/* Filter by falcon */
@@ -68,22 +71,35 @@ public class TestScipt extends BaseClass {
 		CommonHelpers.clickAction(driver, property.getProperty("loc_testcase"));
 		Thread.sleep(2000);
 
-		/* Click pass icon */
-		CommonHelpers.clickAction(driver, property.getProperty("loc_passbutton"));
-		Thread.sleep(2000);
-
 		/* Click fail icon */
 		CommonHelpers.clickAction(driver, property.getProperty("loc_failbutton"));
 		Thread.sleep(2000);
 
 		/* Click skip icon */
 		CommonHelpers.clickAction(driver, property.getProperty("loc_skipbutton"));
-		CommonHelpers.clickAction(driver, property.getProperty("loc_icon"));
-        
-		/* Validate the recent run table*/
+
+		/* Validate the recent run table */
 		CommonHelpers.clickAction(driver, property.getProperty("loc_recentruns"));
 		Thread.sleep(2000);
 		PageAction.validateTables(driver, 3);
-		
+
+		CommonHelpers.clickAction(driver, property.getProperty("loc_dashboard"));
+		Thread.sleep(2000);
+		/* click on falconpage */
+		CommonHelpers.clickAction(driver, property.getProperty("loc_falconpage"));
+		/* validate dropdown */
+		CommonHelpers.dropdown(driver, property.getProperty("loc_falcon"), "Falcon");
+		CommonHelpers.dropdown(driver, property.getProperty("loc_sampledropdown"), "Sample");
+		CommonHelpers.dropdown(driver, property.getProperty("loc_os"), "WIN_10");
+		CommonHelpers.dropdown(driver, property.getProperty("loc_chrome"), "chrome_71");
+		CommonHelpers.dropdown(driver, property.getProperty("loc_falconpass"), "Pass");
+		CommonHelpers.dropdown(driver, property.getProperty("loc_falconpass"), "Fail");
+		CommonHelpers.dropdown(driver, property.getProperty("loc_falconpass"), "Skip");
+
+		/*
+		 * CommonHelpers.clickAction(driver, property.getProperty("loc_tabletext"));
+		 * Thread.sleep(2000);
+		 */
+
 	}
-		}
+}
